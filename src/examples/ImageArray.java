@@ -2,28 +2,40 @@ package examples;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class ImageArray {
 
 	public static void main(String[] args) {
 
 		ImageViewer imageViewer = new ImageViewer("Amongst The Tales Of Life.jpeg");
-		
+
 		int[][][] imageAsArray = convertToArray(imageViewer.getImage());
-		
-		// 1. Print the RGB value for each pixel in the image.
-		
+
+	//	 1. Print the RGB value for each pixel in the image.
+		for (int[][] ep : imageAsArray) {
+			for (int[] c : ep) {
+				System.out.println(Arrays.toString(c));
+			}
+		}
 		// 2. Remove all the blue and green from the image.
-		
+		for (int[][] ep : imageAsArray) {
+			for (int[] c : ep) {
+				c[1] = 0;
+				c[2] = 0;
+			}
+		}
 		// 3. Convert to black & white.
-		
+		for (int[][] ep : imageAsArray) {
+			for (int[] c : ep) {
+				c[2] = c[1] = c[0];
+			}}
 		// [optional] Post a manipulated photo of yourself to Slack.
-		
-		
+
 		imageViewer.setImage(convertToImage(imageAsArray));
-		
+
 		imageViewer.show();
-		
+
 	}
 
 	private static int[][][] convertToArray(BufferedImage image) {
